@@ -7,9 +7,14 @@ package ears.pkg2;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
 /**
@@ -21,6 +26,8 @@ public class MainUI extends javax.swing.JFrame {
     /**
      * Creates new form MainUI
      */
+    int countPanel=2;
+    String filename = new String();
     public MainUI() {
         initComponents();
     }
@@ -34,6 +41,7 @@ public class MainUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox();
@@ -62,6 +70,11 @@ public class MainUI extends javax.swing.JFrame {
         jTabbedPane1.setAutoscrolls(true);
 
         jPanel1.setAutoscrolls(true);
+        jPanel1.setLayout(new java.awt.GridLayout(0, 2));
+        jTabbedPane1.addTab("File 1", jPanel1);
+
+        jScrollPane2.setViewportView(jTabbedPane1);
+        jTabbedPane1.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Select requirement type>", "Generic requirement", "Ubiquitous requirement", "Event driven requirement", "Unwanted behaviour", "State-driven requirement", "Optional feature" }));
         jComboBox1.setSelectedIndex(-1);
@@ -70,25 +83,6 @@ public class MainUI extends javax.swing.JFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(313, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(178, 178, 178))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(361, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("File 1", jPanel1);
 
         jMenu1.setText("File");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
@@ -176,17 +170,21 @@ public class MainUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 51, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 762, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(259, 259, 259)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 61, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
         );
-
-        jTabbedPane1.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -201,6 +199,10 @@ public class MainUI extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
        // TODO add your handling code here:
+        filename="File"+countPanel++;
+        //JPanel jpanel+filename =
+        jTabbedPane1.addTab(filename, new JPanel(new GridLayout(0,2)));
+        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MouseClicked
@@ -213,100 +215,122 @@ public class MainUI extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        
-        jPanel1.setLayout(new FlowLayout(FlowLayout.CENTER,1,1));
+
         int selected = jComboBox1.getSelectedIndex();
+        JPanel c = (JPanel)jTabbedPane1.getComponentAt(jTabbedPane1.getSelectedIndex());
         switch(selected)
         {
-            case 0: JOptionPane.showMessageDialog(jPanel1, "Please select a valid option", "Warning", JOptionPane.WARNING_MESSAGE);
-                break;
-            case 1: LeftPane lp1 = new LeftPane();
-                String uuid=java.util.UUID.randomUUID().toString().replaceAll("-", "");
-                System.out.println(uuid);
-                lp1.jLabel2.setText(uuid);
-                lp1.jLabel6.setText("red");
-                lp1.jLabel6.setForeground(Color.red);
-                lp1.jLabel4.setText("Type1");
-                jPanel1.add(lp1);
-                
-                jPanel1.add(new Req1());
-                jPanel1.revalidate();
-                //validate();
-                //jPanel1.setVisible(true);
-                break;
-            case 2: LeftPane lp2 = new LeftPane();
-                String uuid2=java.util.UUID.randomUUID().toString().replaceAll("-", "");
-                System.out.println(uuid2);
-                lp2.jLabel2.setText(uuid2);
-                lp2.jLabel6.setText("red");
-                lp2.jLabel6.setForeground(Color.red);
-                lp2.jLabel4.setText("Type2");
-                jPanel1.add(lp2);
-                
-                jPanel1.add(new Req2());
-                jPanel1.revalidate();
-                //validate();
-                //jPanel1.setVisible(true);
-                break;
-            case 3: LeftPane lp3 = new LeftPane();
-                String uuid3=java.util.UUID.randomUUID().toString().replaceAll("-", "");
-                System.out.println(uuid3);
-                lp3.jLabel2.setText(uuid3);
-                lp3.jLabel6.setText("red");
-                lp3.jLabel6.setForeground(Color.red);
-                lp3.jLabel4.setText("Type3");
-                jPanel1.add(lp3);
-                
-                jPanel1.add(new Req3());
-                jPanel1.revalidate();
-                //validate();
-                //jPanel1.setVisible(true);
-                break;
-            case 4: LeftPane lp4 = new LeftPane();
-                String uuid4=java.util.UUID.randomUUID().toString().replaceAll("-", "");
-                System.out.println(uuid4);
-                lp4.jLabel2.setText(uuid4);
-                lp4.jLabel6.setText("red");
-                lp4.jLabel6.setForeground(Color.red);
-                lp4.jLabel4.setText("Type4");
-                jPanel1.add(lp4);
-                
-                jPanel1.add(new Req4());
-                jPanel1.revalidate();
-                //validate();
-                //jPanel1.setVisible(true);
-                break;
-            case 5: LeftPane lp5 = new LeftPane();
-                String uuid5=java.util.UUID.randomUUID().toString().replaceAll("-", "");
-                System.out.println(uuid5);
-                lp5.jLabel2.setText(uuid5);
-                lp5.jLabel6.setText("red");
-                lp5.jLabel6.setForeground(Color.red);
-                lp5.jLabel4.setText("Type5");
-                jPanel1.add(lp5);
-                
-                jPanel1.add(new Req5());
-                jPanel1.revalidate();
-                //validate();
-                //jPanel1.setVisible(true);
-                break;
-            case 6: LeftPane lp6 = new LeftPane();
-                String uuid6=java.util.UUID.randomUUID().toString().replaceAll("-", "");
-                System.out.println(uuid6);
-                lp6.jLabel2.setText(uuid6);
-                lp6.jLabel6.setText("red");
-                lp6.jLabel6.setForeground(Color.red);
-                lp6.jLabel4.setText("Type6");
-                jPanel1.add(lp6);
-                
-                jPanel1.add(new Req6());
-                jPanel1.revalidate();
-                //validate();
-                //jPanel1.setVisible(true);
-                break;
-       }
-        
+        case 0: JOptionPane.showMessageDialog(jPanel1, "Please select a valid option", "Warning", JOptionPane.WARNING_MESSAGE);
+            break;
+        case 1: LeftPane lp1 = new LeftPane();
+            String uuid=java.util.UUID.randomUUID().toString().replaceAll("-", "");
+            System.out.println(uuid);
+            //lp1.jLabel2.setText(uuid);
+            lp1.jLabel6.setText("red");
+            lp1.jLabel6.setForeground(Color.red);
+            lp1.jLabel4.setText("Type1");
+            System.out.println(jTabbedPane1.getSelectedIndex());
             
+//            if( c instanceof JPanel)
+//                System.out.println("Yes");
+//            else
+//                System.out.println("No");
+            c.add(lp1);
+            //jScrollPane1.getViewport().add(lp1);
+            //jScrollPane1.validate();
+
+            c.add(new Req1());
+            //jPanel3.validate();
+            //jPanel2.add(jPanel3);
+            //jPanel2.validate();
+            //jScrollPane2.getViewport().add(jPanel1);
+            c.revalidate();
+            jTabbedPane1.revalidate();
+            jTabbedPane1.repaint();
+            //validate();
+            //jPanel1.setVisible(true);
+            break;
+        case 2: LeftPane lp2 = new LeftPane();
+            String uuid2=java.util.UUID.randomUUID().toString().replaceAll("-", "");
+            System.out.println(uuid2);
+            //lp2.jLabel2.setText(uuid2);
+            lp2.jLabel6.setText("red");
+            lp2.jLabel6.setForeground(Color.red);
+            lp2.jLabel4.setText("Type2");
+            c.add(lp2);
+
+            c.add(new Req2());
+            c.revalidate();
+            jTabbedPane1.revalidate();
+            jTabbedPane1.repaint();
+            //validate();
+            //jPanel1.setVisible(true);
+            break;
+        case 3: LeftPane lp3 = new LeftPane();
+            String uuid3=java.util.UUID.randomUUID().toString().replaceAll("-", "");
+            System.out.println(uuid3);
+            //lp3.jLabel2.setText(uuid3);
+            lp3.jLabel6.setText("red");
+            lp3.jLabel6.setForeground(Color.red);
+            lp3.jLabel4.setText("Type3");
+            c.add(lp3);
+
+            c.add(new Req3());
+            c.revalidate();
+            jTabbedPane1.revalidate();
+            jTabbedPane1.repaint();
+            //validate();
+            //jPanel1.setVisible(true);
+            break;
+        case 4: LeftPane lp4 = new LeftPane();
+            String uuid4=java.util.UUID.randomUUID().toString().replaceAll("-", "");
+            System.out.println(uuid4);
+            //lp4.jLabel2.setText(uuid4);
+            lp4.jLabel6.setText("red");
+            lp4.jLabel6.setForeground(Color.red);
+            lp4.jLabel4.setText("Type4");
+            c.add(lp4);
+
+            c.add(new Req4());
+            c.revalidate();
+            jTabbedPane1.revalidate();
+            jTabbedPane1.repaint();
+            //validate();
+            //jPanel1.setVisible(true);
+            break;
+        case 5: LeftPane lp5 = new LeftPane();
+            String uuid5=java.util.UUID.randomUUID().toString().replaceAll("-", "");
+            System.out.println(uuid5);
+            //lp5.jLabel2.setText(uuid5);
+            lp5.jLabel6.setText("red");
+            lp5.jLabel6.setForeground(Color.red);
+            lp5.jLabel4.setText("Type5");
+            c.add(lp5);
+
+            c.add(new Req5());
+            c.revalidate();
+            jTabbedPane1.revalidate();
+            jTabbedPane1.repaint();
+            //validate();
+            //jPanel1.setVisible(true);
+            break;
+        case 6: LeftPane lp6 = new LeftPane();
+            String uuid6=java.util.UUID.randomUUID().toString().replaceAll("-", "");
+            System.out.println(uuid6);
+            //lp6.jLabel2.setText(uuid6);
+            lp6.jLabel6.setText("red");
+            lp6.jLabel6.setForeground(Color.red);
+            lp6.jLabel4.setText("Type6");
+            c.add(lp6);
+
+            c.add(new Req6());
+            c.revalidate();
+            jTabbedPane1.revalidate();
+            jTabbedPane1.repaint();
+            //validate();
+            //jPanel1.setVisible(true);
+            break;
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
@@ -365,6 +389,7 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }
